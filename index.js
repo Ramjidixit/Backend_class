@@ -7,7 +7,7 @@ const port=5056;
 //     res.send("port stareted at 5056 hiiiiiiiiiiiii");
 // })
 
-app.use(express.static(path.join(__dirname,'static')));...............
+app.use(express.static(path.join(__dirname,'static')));
 
 app.get('/information',(req,res)=>{
     console.log(req);
@@ -19,6 +19,13 @@ app.post('/information',(req,res)=>{
     res.send("data send successfully");
 })
 
+app.get('/about',(req,res,next)=>{
+    console.log("first call back");
+    next();
+},(req,res)=>{
+    console.log('second call back ')
+    res.send('program run successfully');
+})
 //data using params 
 app.get('/student/:roll([0-9]{2})/:section([A-Za-z])',(req,res,next)=>{
     console.log(req.params);
